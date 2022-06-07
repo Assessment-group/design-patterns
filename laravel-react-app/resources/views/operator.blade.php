@@ -13,7 +13,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        Welcome to User page
+                        Welcome to admin page
                         {{ __('You are logged in!') }}
                     </div>
                 </div>
