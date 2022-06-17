@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class Task extends Model
 {
     use HasFactory;
-
     /**
-     * The users that belong to the role.
+     * The project that belong to the role.
      */
-    public function users()
+    public function projects()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(Project::class);
     }
 }
+

@@ -2,44 +2,19 @@
 
 namespace App\Models;
 
-
-
-
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class User extends Auth
+class User extends Model
 {
-    use HasFactory, Notifiable;
-
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    use HasFactory;
 
     /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
+     * The users that belong to the role.
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
-
-    public function roles()
+    public function role(): HasMany
     {
-        return $this->belongsToMany(Role::class);
+        return $this->hasMany(Role::class);
     }
 }
