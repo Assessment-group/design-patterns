@@ -4,16 +4,30 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Task extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['title', 'description', 'community','status','deadline'];
+
+
     /**
      * The project that belong to the role.
      */
-    public function projects()
+    public function project():BelongsTo
     {
         return $this->belongsTo(Project::class);
+    }
+
+    /**
+     * The project that belong to the role.
+     */
+    public function user():HasMany
+    {
+        return $this->hasMany(Project::class);
     }
 }
 
