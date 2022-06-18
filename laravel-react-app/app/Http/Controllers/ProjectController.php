@@ -3,57 +3,60 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Repositories\Repository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class ProjectController extends Controller
 {
+    // space that we can use the repository from
+    protected $model;
+
+    public function __construct(Project $project)
+    {
+        // set the model
+        $this->model = new Repository($project);
+    }
+
     public function index()
     {
-
-        return Project::select('id','title','description','company_name')->get();;
+        $ProjectList = $this->model->getModel()->orderBy('created_at', 'desc')->get();
+        return view('projects.list', compact('ProjectList'));
 
     }
+
+    public function insert()
+    {
+        return view('projects/add');
+    }
+
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'company_name' => 'required',
-            'status' => 'required',
-            'deadline' => 'required',
-        ]);
-        $project = Project::create([
-            'title' => $validatedData['name'],
-            'description' => $validatedData['description'],
-            'company_name' => $validatedData['company_name'],
-            'status' => $validatedData['status'],
-            'deadline' => $validatedData['deadline'],
-        ]);
-        return response()->json('Project created!');
+        $this->model->create($request->all());
 
-//        $project = new Project();
-//        $project->title = $request->title;
-//        $project->description = $request->description;
-//        $project->company_name = $request->company_name;
-//        $project->status = $request->status;
-//        $project->deadline = $request->deadline;
-//        $project->save();
-//        return redirect('projects/show')->with('status', 'Project Has Been inserted');
+        return redirect()->route('projects')->with('status', 'Project added');
     }
 
     public function show($id)
     {
-        $projects = DB::table('projects')->get();
+        $projects = $this->model->show($id);
+        return view('projects.show', compact('projects'));
 
-        return $projects->toJson();
     }
-
-    public function status(Project $project)
+    public function edit($id)
     {
-        $project->status = true;
-        $project->update();
+        $projects = Project::find($id);
 
-        return response()->json('Project updated!');
+        return view('projects.edit', compact('projects'));
+    }
+    public function update(Request $request, $id)
+    {
+        $this->model->update($request->all(), $id);
+        return redirect('/edit')->with('success', 'Project up to date.');
+    }
+    public function destroy($id)
+    {
+        return $this->model->delete($id);
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Interfaces\RepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 
 class Repository implements RepositoryInterface
@@ -44,7 +43,7 @@ class Repository implements RepositoryInterface
     // show the record with the given id
     public function show($id)
     {
-        return $this->model-findOrFail($id);
+        return $this->model->findOrFail($id);
     }
 
     // Get the associated model
