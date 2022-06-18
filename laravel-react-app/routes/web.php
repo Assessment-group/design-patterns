@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -13,14 +16,23 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('dashboard');
-});
+Auth::routes();
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Auth::routes();
 
-Route::get('/operator', [App\Http\Controllers\HomeController::class, 'adminPage'])->name('operator')->middleware('isAdmin');
+Route::get('/projects', [ProjectController::class, 'index'])->name('projects');
+Route::get('projects/add', [ProjectController::class, 'insert']);
+Route::post('projects', [ProjectController::class, 'store']);
+Route::get('projects/show/{id}', [ProjectController::class, 'show'])->name('projects.show');
+
+Route::get('projects/edit/{id}', [ProjectController::class, 'edit'])->name('projects.edit');
+Route::put('projects/edit/{id}', [ProjectController::class, 'update'])->name('update');
+Route::delete('projects/show/{id}', [ProjectController::class, 'destroy'])->name('destroy');
+
+
+Route::get('/customer', [CustomerController::class, 'index'])->name('customer');
+Route::get('/tasks', [TaskController::class, 'index'])->name('tasks');

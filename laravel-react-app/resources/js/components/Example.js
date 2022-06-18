@@ -1,24 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-
-function Example() {
-    return (
-        <div className="container">
-            <div className="row justify-content-center">
-                <div className="col-md-8">
-                    <div className="card">
-                        <div className="card-header">Example Component</div>
-
-                        <div className="card-body">I'm an example component!</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
+import React, { Component } from 'react';
+import FooComponent from './foo-component';
+import BarComponent from './bar-component';
+class MyComponent extends Component {
+    components = {
+        foo: FooComponent,
+        bar: BarComponent
+    };
+    render() {
+        const TagName = this.components[this.props.tag || 'foo'];
+        return <TagName />
+    }
 }
-
-export default Example;
-
-if (document.getElementById('example')) {
-    ReactDOM.render(<Example />, document.getElementById('example'));
-}
+export default MyComponent;
+// if (document.getElementById('example')) {
+//     ReactDOM.render(<Example />, document.getElementById('example'));
+// }

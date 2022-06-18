@@ -34,10 +34,10 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">Home</a>
+                            <a class="nav-link" href="/">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Features</a>
+                            <a class="nav-link" href="{{'/projects'}}">Projects</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Pricing</a>
@@ -89,6 +89,10 @@
         <main class="py-0">
             @yield('content')
         </main>
+
+        <footer class="pt-4">
+            @yield('footer')
+        </footer>
     </div>
 </body>
 </html>

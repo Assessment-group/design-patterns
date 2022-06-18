@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Project;
+use App\Models\User;
+use Illuminate\Support\Facades\View;
 
 class HomeController extends Controller
 {
@@ -23,11 +25,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
-    }
+        $users = User::query();
+        $user = auth()->user();
 
-    public function adminPage()
+        $profile = $user->customer;
+        return view::make('home')
+            ->with('users', $users);
+    }
+    public function projects()
     {
-        return view('operator');
+        $projects = Project::all();
+
+        return view::make('projects')
+            ->with('project', $projects);
     }
 }
