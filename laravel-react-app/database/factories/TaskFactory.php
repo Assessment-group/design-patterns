@@ -19,10 +19,9 @@ class TaskFactory extends Factory
         return [
             'title' => $this->faker->title,
             'description' => $this->faker->text,
-            'Community' => $this->faker->text,
+            'community' => $this->faker->text,
             'status' => $status,
             'deadline' => $this->faker->dateTime,
-
             'user_id' => User::factory(),
             'project_id' => Project::factory(),
         ];

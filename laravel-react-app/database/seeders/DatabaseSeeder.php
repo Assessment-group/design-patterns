@@ -16,11 +16,11 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
         $this->call(UserSeeder::class);
-//        $this->call(ProjectSeeder::class);
+        $this->call(ProjectSeeder::class);
         $this->call(RoleSeeder::class);
         $this->call(UserRoleSeeder::class);
-//        $this->call(TaskSeeder::class);
-//        $this->call(CustomerSeeder::class);
+        $this->call(TaskSeeder::class);
+        $this->call(CustomerSeeder::class);
         Model::reguard();
 
     }

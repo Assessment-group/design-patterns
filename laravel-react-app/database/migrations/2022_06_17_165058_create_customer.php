@@ -13,7 +13,7 @@ class CreateCustomer extends Migration
      */
     public function up()
     {
-        Schema::create('customer', function (Blueprint $table) {
+        Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('company_name');
@@ -25,7 +25,7 @@ class CreateCustomer extends Migration
                 ->references('id')
                 ->on('users');
 
-            $table->unsignedBigInteger('project_id')
+            $table->unsignedBigInteger('project_id')->nullable()
                 ->foreign('project_id')
                 ->references('id')
                 ->on('projects');
@@ -39,6 +39,6 @@ class CreateCustomer extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('customer');
+        Schema::dropIfExists('customers');
     }
 }

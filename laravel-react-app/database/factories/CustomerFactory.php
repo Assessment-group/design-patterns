@@ -19,8 +19,8 @@ class CustomerFactory extends Factory
             'name' => $this->faker->jobTitle(),
             'company_name' => $this->faker->company,
             'address' => $this->faker->address,
-            'project_id' => Project::factory(),
             'user_id' => User::factory(),
+            'project_id' => Project::factory(),
         ];
     }
 }
