@@ -24,15 +24,24 @@ class User extends Authenticatable
     ];
 
 
-    public function roles()
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function role()
     {
         return $this->belongsTo(Role::class, 'user_id');
     }
 
     public function customer()
     {
-        return $this->belongsTo(Customer::class);
+        return $this->hasOne(Customer::class);
     }
+
+    public function task()
+    {
+        return $this->belongsTo(Task::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

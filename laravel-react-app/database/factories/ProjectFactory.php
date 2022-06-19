@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Customer;
+use App\Models\Project;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -16,12 +17,12 @@ class ProjectFactory extends Factory
      */
     public function definition()
     {
-//        this->faker->randomElement(['To Do','In Progress','Done'])
         return [
+            'customer_id' => Customer::factory(),
             'title' => $this->faker->jobTitle(),
             'description' => $this->faker->text,
             'company_name' => $this->faker->company,
-            'status' => $this->faker->company,
+            'status' => $this->faker->randomElement(Project::PROJECT_STATUS),
             'deadline' => $this->faker->dateTime,
         ];
 

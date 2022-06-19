@@ -15,6 +15,7 @@
             <th scope="col">Company name</th>
             <th scope="col">Status</th>
             <th scope="col">Deadline</th>
+            <th scope="col">Customer</th>
             <th scope="col">Actions</th>
         </tr>
         </thead>
@@ -25,6 +26,9 @@
             <td >{{$project->description}}</td>
             <td >{{$project->company_name}}</td>
             <td >{{$project->status}}</td>
+            @if(!$project->customer_id)
+            <td >{{$project->customer_id}}vdvsdv</td>
+            @endif
             <td >{{$project->deadline}}</td>
             <td >
                 <a href="{{ route('projects.show',[$project->id]) }}" class="btn btn-success w-100 text-light ">Show</a>

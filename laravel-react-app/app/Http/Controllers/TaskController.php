@@ -20,7 +20,7 @@ class TaskController extends Controller
 
     public function index(Request $request)
     {
-        $givenUser = $this->model->with('user')->get();
+        $givenUser = $this->model->all();
 
         dd($givenUser);
     }
