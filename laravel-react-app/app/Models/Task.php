@@ -25,9 +25,9 @@ class Task extends Model
     /**
      * The project that belong to the role.
      */
-    public function user():HasMany
+    public function user():BelongsTo
     {
-        return $this->hasMany(Project::class);
+        return $this->belongsTo(User::class);
     }
 }
 

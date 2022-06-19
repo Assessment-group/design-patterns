@@ -5,11 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Project extends Model
 {
     use HasFactory;
 
+    public const IN_PROGRESS = 'In progress';
+    public const TO_DO = 'To do';
+    public const DONE = 'Done';
+
+    public const PROJECT_STATUS = [
+        self::IN_PROGRESS,
+        self::TO_DO,
+        self::DONE,
+    ];
     protected $fillable = ['title', 'description', 'company_name','status','deadline'];
 
 
@@ -19,6 +29,11 @@ class Project extends Model
     public function Tasks(): BelongsTo
     {
         return $this->belongsTo(Task::class);
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
     }
 
 }

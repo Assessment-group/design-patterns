@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Repositories\Repository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
 
 class ProjectController extends Controller
 {
@@ -22,6 +20,8 @@ class ProjectController extends Controller
     public function index()
     {
         $ProjectList = $this->model->getModel()->orderBy('created_at', 'desc')->get();
+        $data = $this->model->with('customer')->get();
+        dump($data);
         return view('projects.list', compact('ProjectList'));
 
     }

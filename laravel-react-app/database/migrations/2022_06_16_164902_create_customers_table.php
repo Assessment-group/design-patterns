@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCustomer extends Migration
+class CreateCustomersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,21 +14,18 @@ class CreateCustomer extends Migration
     public function up()
     {
         Schema::create('customers', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->unsignedInteger('user_id')->nullable();
             $table->string('name');
             $table->string('company_name');
             $table->string('address');
             $table->timestamps();
 
-            $table->unsignedBigInteger('user_id')
-                ->foreign('user_id')
+            $table->foreign('user_id')
                 ->references('id')
-                ->on('users');
+                ->on('users')
+                ->onDelete('cascade');
 
-            $table->unsignedBigInteger('project_id')->nullable()
-                ->foreign('project_id')
-                ->references('id')
-                ->on('projects');
         });
     }
 
