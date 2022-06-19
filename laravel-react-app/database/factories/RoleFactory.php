@@ -3,13 +3,12 @@
 namespace Database\Factories;
 
 use App\Models\Role;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
 class RoleFactory extends Factory
 {
     protected $model = Role::class;
+    private $counter = 3;
 
     /**
      * Define the model's default state.
@@ -18,8 +17,9 @@ class RoleFactory extends Factory
      */
     public function definition()
     {
+        $this->counter = $this->counter -1;
         return [
-            'name' => $this->faker->randomElement(Role::ROLE_NAME),
+            'name' => Role::ROLE_NAME[$this->counter],
         ];
     }
 }
