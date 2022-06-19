@@ -39,15 +39,16 @@ class HomeController extends Controller
 
     public function index()
     {
-        $users = $this->model->with('role')->select('roles.name','=', 'Developer')
-            ->join('role', 'users.id', '=', 'roles.role_id');
+        $users = $this->model->with('role')->select('*')
+            ->join('roles', 'users.role_id', '=', 'roles.id')
+            ->where('roles.name', '=', Role::DEVELOPER)
+            ->get();
 
-        $role = $this->role->with('users')->where('name','=', Role::DEVELOPER)
-            ->join('roles', 'role.id', '=', 'users.user_id')->first();
-        dump($role);
+//        $role = $this->model->with('role')->getRelation();
+        dump($users);
 
         return view::make('home')
-            ->with('users', $role);
+            ->with('users', $users);
     }
     public function projects()
     {
