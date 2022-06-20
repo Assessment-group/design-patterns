@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class RoleFactory extends Factory
 {
-    protected $model = Role::class;
     private $counter = 3;
 
     /**
@@ -19,6 +18,7 @@ class RoleFactory extends Factory
     {
         $this->counter = $this->counter -1;
         return [
+//            'name' => $this->faker->randomElement(Role::ROLE_NAME)
             'name' => Role::ROLE_NAME[$this->counter],
         ];
     }

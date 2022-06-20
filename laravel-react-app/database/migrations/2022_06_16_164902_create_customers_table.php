@@ -25,7 +25,6 @@ class CreateCustomersTable extends Migration
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
-
         });
     }
 

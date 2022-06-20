@@ -17,7 +17,7 @@ class CreateTasksTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id')->nullable();
             $table->unsignedInteger('project_id');
-            $table->string('title');
+            $table->string('taskName');
             $table->text('description');
             $table->string('community');
             $table->string('status');

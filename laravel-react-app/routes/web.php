@@ -33,6 +33,21 @@ Route::get('projects/edit/{id}', [ProjectController::class, 'edit'])->name('proj
 Route::put('projects/edit/{id}', [ProjectController::class, 'update'])->name('update');
 Route::delete('projects/show/{id}', [ProjectController::class, 'destroy'])->name('destroy');
 
+Auth::routes();
+
+// Task routs
+Route::get('/tasks', [TaskController::class, 'index'])->name('tasks');
+Route::get('tasks/add', [TaskController::class, 'insert']);
+Route::post('tasks', [TaskController::class, 'store']);
+Route::get('tasks/show/{id}', [TaskController::class, 'show'])->name('tasks.show');
+
+Route::get('tasks/edit/{id}', [TaskController::class, 'edit'])->name('tasks.edit');
+Route::put('tasks/edit/{id}', [TaskController::class, 'update'])->name('update');
+Route::delete('tasks/show/{id}', [TaskController::class, 'destroy'])->name('destroy');
+
+
 
 Route::get('/customer', [CustomerController::class, 'index'])->name('customer');
-Route::get('/tasks', [TaskController::class, 'index'])->name('tasks');
+
+
+Route::get('/project', [ProjectController::class, 'indexObserver']);
