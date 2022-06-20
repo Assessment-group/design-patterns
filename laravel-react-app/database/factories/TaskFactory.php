@@ -17,7 +17,7 @@ class TaskFactory extends Factory
     {
         $status = $attributes['name'] ?? $this->faker->randomElement(['To do','In progress','Done']);
         return [
-            'title' => $this->faker->title,
+            'taskName' => $this->faker->title,
             'description' => $this->faker->text,
             'community' => $this->faker->text,
             'status' => $status,

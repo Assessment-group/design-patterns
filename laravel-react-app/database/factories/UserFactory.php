@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\Role;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class UserFactory extends Factory
@@ -16,13 +15,13 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        Role::factory()->make();
         return [
             'name' => $this->faker->name(),
-            'email' => $this->faker->unique()->safeEmail(),
+            'email' => 'admin@admin.com',
             'email_verified_at' => now(),
-            'role_id' => rand(1,3),
-            'password' => $this->faker->password(), // password
+            'role_id' => 3,
+            'password' => '123456',
+
             'remember_token' => Str::random(10),
         ];
     }

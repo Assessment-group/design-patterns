@@ -26,10 +26,10 @@
             <td >{{$project->description}}</td>
             <td >{{$project->company_name}}</td>
             <td >{{$project->status}}</td>
-            @if(!$project->customer_id)
-            <td >{{$project->customer_id}}vdvsdv</td>
-            @endif
             <td >{{$project->deadline}}</td>
+            @if($project->company_name)
+                <td >{{$project->company_name}}</td>
+            @endif
             <td >
                 <a href="{{ route('projects.show',[$project->id]) }}" class="btn btn-success w-100 text-light ">Show</a>
                 <a href="{{ route('projects.edit',[$project->id]) }}" class='btn btn-warning w-100 mb-2 mt-2 text-light' >Edit</a>

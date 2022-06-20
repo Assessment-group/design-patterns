@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use App\Repositories\Repository;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -19,9 +20,8 @@ class ProjectController extends Controller
 
     public function index()
     {
-        $ProjectList = $this->model->getModel()->orderBy('created_at', 'desc')->get();
-        $data = $this->model->with('customer')->get();
-        dump($data);
+        $ProjectList = $this->model->with('customer')->orderBy('deadline', 'desc')->get();
+
         return view('projects.list', compact('ProjectList'));
 
     }
@@ -31,6 +31,16 @@ class ProjectController extends Controller
         return view('projects/add');
     }
 
+    public function indexObserver()
+    {
+        $project = Project::create([
+            'title' => 'Platinum 1',
+            'description' => '1010',
+            'status' => '1010',
+            'company_name' => '1010',
+            'deadline' => Carbon::now(),
+        ]);
+    }
     public function store(Request $request)
     {
         $this->model->create($request->all());
@@ -42,7 +52,6 @@ class ProjectController extends Controller
     {
         $projects = $this->model->show($id);
         return view('projects.show', compact('projects'));
-
     }
     public function edit($id)
     {
